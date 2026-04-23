@@ -13,11 +13,11 @@ export class RelayRoom {
     this.state = state;
     this.env = env;
     this.peerManager = getPeerManager();
-    // this._cleanupTimer = null;
+    this._cleanupTimer = null;
 
     // Restore sockets after hibernation to keep metadata
     this.state.getWebSockets().forEach((ws) => this._restoreSocket(ws));
-    // this._ensureCleanupTimer();
+    this._ensureCleanupTimer();
   }
 
   async fetch(request) {
@@ -41,7 +41,7 @@ export class RelayRoom {
   async handleSession(webSocket) {
     this.state.acceptWebSocket(webSocket);
     this._initSocket(webSocket);
-    // this._ensureCleanupTimer();
+    this._ensureCleanupTimer();
   }
 
   async webSocketMessage(ws, message) {
