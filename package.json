@@ -5,6 +5,7 @@
   "type": "module",
   "main": "src/worker.js",
   "scripts": {
+    "build:wasm": "cd wasm && wasm-pack build --release --target web --out-dir ../src/worker/core/pkg",
     "dev": "wrangler dev --ip 0.0.0.0",
     "start": "wrangler dev",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,11 +15,14 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.5",
-    "protobufjs": "^8.0.0",
     "uuid": "^13.0.0",
+  
     "ws": "^8.18.3"
   },
   "devDependencies": {
-    "protobufjs-cli": "^2.0.0"
+    "protobufjs-cli": "^2.0.0",
+    "wasm-pack": "^0.14.0",
+    "wrangler": "^4.84.0"
+     
   }
 }
