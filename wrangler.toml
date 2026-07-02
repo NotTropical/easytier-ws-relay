@@ -13,6 +13,11 @@ bindings = [
   { name = "RELAY_ROOM", class_name = "RelayRoom" }
 ]
 
+[[rules]]
+type = "CompiledWasm"
+globs = ["**/*.wasm"]
+fallthrough = true
+
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["RelayRoom"]
