@@ -214,3 +214,54 @@ export function wrapPacket(createHeader, fromPeerId, toPeerId, packetType, paylo
 
   return Buffer.concat([headerBuf, body]);
 }
+
+
+export function safeJSONparse(jsonStr) {
+  // return JSON.parse(jsonStr, (key, value) => {
+  //   // 在这里做int64解析无法满足，因为这个时候精度已经丢了，改到rust代码全部替换成字符串
+  //   return value;
+  // });
+  return JSON.parse(jsonStr)
+}
+
+
+ function stringifyWithBigInt0(obj) {
+  if (obj === null || obj === undefined) return 'null';
+  if (typeof obj === 'bigint') {
+    // 直接输出数字字面量，不带引号
+    return obj.toString();
+  }
+  if (typeof obj === 'number') {
+    if (!Number.isSafeInteger(obj) && !isNaN(obj) && isFinite(obj)) {
+      console.log('unsafe number', obj)
+      // 非安全整数仍然输出数字，但可能会丢失精度，不过这种情况较少
+    }
+    return obj.toString();
+  }
+  if (typeof obj === 'string') return JSON.stringify(obj);
+  if (typeof obj === 'boolean') return obj.toString();
+  if (Array.isArray(obj)) {
+    const items = obj.map(item => stringifyWithBigInt0(item));
+    return `[${items.join(',')}]`;
+  }
+  if (typeof obj === 'object') {
+    const pairs = [];
+    for (const [key, value] of Object.entries(obj)) {
+      if (value === undefined) continue;
+      const keyStr = JSON.stringify(key);
+      const valueStr = stringifyWithBigInt0(value);
+      pairs.push(`${keyStr}:${valueStr}`);
+    }
+    return `{${pairs.join(',')}}`;
+  }
+  // 其他类型（function, symbol 等）忽略
+  return undefined;
+}
+
+export function safeJSONstringify(a) {
+  // const out =  stringifyWithBigInt0(a)
+  // bytes序列化成number[]数组了（数据膨胀），造成序列化/反序列化开销，使用json传递（而不是jsval, serde_wasm_bindgen::from_value）因为int64导致报错，用json绕过这个问题
+  const out =  JSON.stringify(a)
+  // console.log(out) 
+  return out
+}
